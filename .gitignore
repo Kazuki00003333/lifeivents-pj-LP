@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Applications & installers
+*.app
+*.dmg
+*.pkg
+*.iso
+
+# Large media (optional - remove if needed)
+*.mp4
+*.mov
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if added later)
+node_modules/

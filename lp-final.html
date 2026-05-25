@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>LifePath ・ 人生の節目を、抜け漏れなく</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="七五三・入学・結婚式・葬儀まで。家族の節目を抜け漏れなく準備する、ライフプランニングアプリ。事前登録受付中。" />
+
+<!-- Open Graph / Twitter Card -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="LifePath ・ 人生にも、ガントチャートを。" />
+<meta property="og:description" content="七五三・入学・結婚式・葬儀まで。家族の節目を抜け漏れなく準備するアプリ。" />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="LifePath ・ 人生にも、ガントチャートを。" />
+<meta name="twitter:description" content="家族の節目を抜け漏れなく準備するアプリ。事前登録受付中。" />
+<meta name="twitter:image" content="og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Yusei+Magic&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F6EFE4;
+    --bg-soft: #FBF5EB;
+    --surface: #FFFCF7;
+    --surface-alt: #EFE5D4;
+    --ink: #2A201A;
+    --ink2: #6F5F52;
+    --ink3: #A89A8B;
+    --line: #E6DAC5;
+    --accent: #B5572E;
+    --accent-soft: #E9C7AE;
+    --celebration: #C28534;
+    --wedding: #B5485C;
+    --funeral: #6E5380;
+    --other: #7E8C7B;
+    --tape: rgba(212, 184, 128, 0.55);
+    --serif: "Noto Serif JP", serif;
+    --sans: "Noto Sans JP", -apple-system, system-ui, sans-serif;
+    --hand: "Caveat", "Yusei Magic", "Noto Serif JP", serif;
+    --hand-jp: "Yusei Magic", "Caveat", "Noto Serif JP", serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* ───────── HEADER ───────── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 24px;
+    backdrop-filter: blur(12px);
+    background: rgba(246, 239, 228, 0.85);
+    border-bottom: 1px solid transparent;
+    transition: padding 0.3s, border-color 0.3s, background 0.3s;
+  }
+  header.scrolled {
+    border-bottom-color: var(--line);
+    background: rgba(246, 239, 228, 0.96);
+    padding: 11px 24px;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-family: var(--serif); font-size: 26px; font-weight: 600;
+    letter-spacing: -0.6px; line-height: 1;
+  }
+  .logo small {
+    display: block; font-family: var(--serif); font-size: 10px;
+    color: var(--accent); letter-spacing: 4px; margin-top: 2px;
+    font-weight: 500;
+  }
+  header .hdr-cta {
+    background: var(--accent); color: #fff; padding: 10px 18px;
+    border-radius: 999px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: transform 0.12s, box-shadow 0.2s;
+    border: none;
+  }
+  header .hdr-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(181,87,46,0.25);
+  }
+
+  /* ───────── HERO ───────── */
+  .hero {
+    padding: 124px 24px 72px;
+    background:
+      radial-gradient(ellipse at 75% 0%, rgba(233, 199, 174, 0.35), transparent 55%),
+      var(--bg);
+  }
+  .hero-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; gap: 40px;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  @media (min-width: 880px) {
+    .hero-inner { grid-template-columns: 1.15fr 1fr; gap: 60px; }
+  }
+
+  .hero .copy { color: var(--ink); }
+  .hero .badge {
+    display: inline-block; padding: 5px 14px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--serif); font-size: 12px; color: var(--ink2);
+    margin-bottom: 24px; font-weight: 500;
+  }
+  .hero .badge .dot {
+    display: inline-block; width: 7px; height: 7px;
+    background: var(--accent); border-radius: 50%; margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* Soft quote, no quote marks */
+  .hero .lead-quote {
+    font-family: var(--serif); font-size: clamp(20px, 3.5vw, 26px);
+    color: var(--ink2); line-height: 1.7; font-weight: 400;
+    margin: 0 0 8px; max-width: 540px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent-soft);
+  }
+  .hero .lead-quote em {
+    font-style: italic; color: var(--accent); font-weight: 500;
+    background: linear-gradient(transparent 65%, rgba(181, 87, 46, 0.18) 65%);
+    padding: 0 3px;
+  }
+  .hero .lead-attr {
+    font-size: 12px; color: var(--ink3);
+    margin: 0 0 28px 18px; font-weight: 400;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(30px, 5.5vw, 44px);
+    font-weight: 500; line-height: 1.3;
+    margin: 0 0 22px; letter-spacing: -0.3px;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--accent); font-weight: 600;
+  }
+
+  .hero .lead {
+    font-size: 14px; color: var(--ink2); line-height: 2;
+    max-width: 460px; margin: 0 0 32px; font-weight: 400;
+  }
+
+  /* Primary CTA */
+  .primary-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff; border: 0;
+    padding: 15px 28px; border-radius: 999px;
+    font-family: var(--serif); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: transform 0.12s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(181, 87, 46, 0.25);
+    margin-bottom: 14px;
+  }
+  .primary-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(181, 87, 46, 0.35);
+  }
+  .primary-cta .arrow {
+    display: inline-block; transition: transform 0.2s;
+  }
+  .primary-cta:hover .arrow { transform: translateX(4px); }
+  .cta-note {
+    font-size: 12px; color: var(--ink3); font-weight: 400;
+    line-height: 1.7;
+  }
+  .cta-note .strong { color: var(--accent); font-weight: 500; }
+
+  /* Hero visual — polaroid stack with image-slots */
+  .hero-visual {
+    position: relative; width: 100%;
+    aspect-ratio: 1 / 1; max-width: 460px;
+    margin: 0 auto;
+  }
+  .polaroid {
+    position: absolute; background: var(--surface);
+    padding: 12px 12px 18px;
+    box-shadow: 0 12px 32px rgba(60, 40, 20, 0.16),
+                0 3px 8px rgba(60, 40, 20, 0.08);
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+  }
+  .polaroid::before {
+    content: ''; position: absolute; top: -10px; left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 56px; height: 18px; background: var(--tape);
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) translateY(-6px) scale(1.04);
+    z-index: 10;
+    box-shadow: 0 16px 36px rgba(60, 40, 20, 0.22);
+  }
+  .polaroid img {
+    width: 100%; aspect-ratio: 1.1 / 1; display: block;
+    border-radius: 0; object-fit: cover;
+  }
+  .polaroid .cap {
+    text-align: center; margin-top: 10px;
+    font-family: var(--hand-jp); font-size: 18px; color: var(--ink);
+    line-height: 1.2;
+  }
+  .polaroid .date {
+    text-align: center; font-family: var(--serif);
+    font-size: 9px; color: var(--ink3); letter-spacing: 2px; margin-top: 4px;
+    font-weight: 500;
+  }
+  .polaroid.p1 { width: 56%; top: 6%; left: 6%; transform: rotate(-7deg); }
+  .polaroid.p2 { width: 56%; top: 28%; right: 4%; transform: rotate(5deg); z-index: 2; }
+  .polaroid.p3 { width: 50%; bottom: 4%; left: 22%; transform: rotate(-2deg); z-index: 3; }
+
+  /* ───────── VOICES (pain) ───────── */
+  .voices {
+    padding: 88px 0;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .section-label {
+    text-align: center; font-family: var(--serif);
+    font-size: 12px; color: var(--accent); margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(22px, 4.5vw, 30px);
+    font-weight: 500; text-align: center; line-height: 1.55;
+    margin: 0 0 44px; letter-spacing: -0.1px;
+  }
+  .section-title em { font-style: italic; color: var(--accent); font-weight: 600; }
+
+  .voice-grid {
+    display: grid; gap: 16px;
+  }
+  @media (min-width: 720px) { .voice-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .voice-card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 22px 22px 18px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 2px 10px rgba(60, 40, 20, 0.03);
+  }
+  .voice-card .quote {
+    font-family: var(--serif); font-size: 15px; line-height: 1.95;
+    color: var(--ink); margin: 0 0 18px; flex: 1; font-weight: 400;
+  }
+  .voice-card .quote em {
+    font-style: italic; color: var(--accent); font-weight: 600;
+  }
+  .voice-card .attr {
+    display: flex; align-items: center; gap: 8px;
+    padding-top: 14px; border-top: 1px dashed var(--line);
+    margin-top: auto;
+  }
+  .voice-card .attr .name {
+    font-family: var(--serif); font-size: 13px; color: var(--ink);
+    font-weight: 500;
+  }
+  .voice-card .attr .dot {
+    width: 3px; height: 3px; border-radius: 50%;
+    background: var(--ink3);
+  }
+  .voice-card .attr .role {
+    font-size: 12px; color: var(--ink3);
+  }
+
+  /* ───────── FEATURES ───────── */
+  .features { padding: 88px 0; }
+  .feature {
+    display: grid; gap: 28px; margin-bottom: 80px;
+    align-items: center;
+  }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 64px; }
+    .feature.reverse > .feature-text { order: 2; }
+  }
+  .feature:last-child { margin-bottom: 0; }
+  .feature-num {
+    font-family: var(--serif); font-size: 12px; color: var(--accent);
+    font-weight: 500;
+  }
+  .feature h3 {
+    font-family: var(--serif); font-size: clamp(21px, 3.6vw, 27px);
+    font-weight: 500; line-height: 1.55;
+    margin: 6px 0 14px; letter-spacing: -0.1px;
+  }
+  .feature h3 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .feature p {
+    font-size: 14px; color: var(--ink2); line-height: 2; margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .feature .tag-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .feature .tag {
+    padding: 4px 12px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 999px;
+    font-size: 11px; font-weight: 500; color: var(--ink2);
+  }
+
+  /* Product mockups */
+  .mock {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 18px; padding: 20px;
+    box-shadow: 0 8px 28px rgba(60, 40, 20, 0.06);
+  }
+  .mock .mock-title {
+    font-family: var(--serif); font-size: 11px; color: var(--ink2);
+    margin-bottom: 12px; font-weight: 500;
+  }
+
+  /* Mock 1: Timeline */
+  .mock-tl { position: relative; padding-left: 22px; }
+  .mock-tl::before {
+    content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px;
+    width: 1px; background: var(--line);
+  }
+  .mock-tl .yr {
+    font-family: var(--serif); font-size: 14px; font-weight: 500;
+    color: var(--ink); margin-bottom: 6px; margin-top: 8px;
+    position: relative;
+  }
+  .mock-tl .yr:first-child { margin-top: 0; }
+  .mock-tl .yr.cur { color: var(--accent); font-weight: 600; }
+  .mock-tl .yr::before {
+    content: ''; position: absolute; left: -22px; top: 5px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--ink3); box-shadow: 0 0 0 3px var(--surface);
+  }
+  .mock-tl .yr.cur::before { background: var(--accent); }
+  .mock-tl .item {
+    padding: 5px 0 5px 10px; margin-bottom: 4px;
+    border-left: 3px solid var(--ink3);
+    font-size: 12px; color: var(--ink); font-family: var(--serif);
+    font-weight: 500;
+  }
+  .mock-tl .item.cel { border-color: var(--celebration); }
+  .mock-tl .item.wed { border-color: var(--wedding); }
+  .mock-tl .item.fun { border-color: var(--funeral); }
+  .mock-tl .item.oth { border-color: var(--other); }
+  .mock-tl .item .meta {
+    font-family: var(--sans); font-size: 10px; color: var(--ink3);
+    font-weight: 400; display: block; margin-top: 2px;
+  }
+
+  /* Mock 2: Tasks */
+  .mock-progress-row {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .mock-progress-bar {
+    flex: 1; height: 6px; background: var(--surface-alt);
+    border-radius: 6px; overflow: hidden;
+  }
+  .mock-progress-bar > div {
+    height: 100%; width: 40%; background: var(--accent); border-radius: 6px;
+  }
+  .mock-progress-text {
+    font-family: var(--serif); font-size: 12px; font-weight: 500;
+  }
+  .mock-task {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-soft); padding: 10px 12px;
+    border-radius: 10px; margin-bottom: 6px;
+  }
+  .mock-task .check {
+    width: 18px; height: 18px; border-radius: 5px;
+    border: 1.5px solid var(--line); flex-shrink: 0;
+    display: grid; place-items: center;
+    color: #fff; font-size: 11px; font-weight: 600;
+  }
+  .mock-task.done .check { background: var(--accent); border-color: var(--accent); }
+  .mock-task .label { flex: 1; font-size: 13px; font-weight: 500; }
+  .mock-task.done .label { text-decoration: line-through; color: var(--ink3); }
+  .mock-task .meta { font-size: 10px; color: var(--ink3); font-weight: 500; }
+  .mock-task.urgent .meta {
+    color: var(--accent); background: rgba(181,87,46,0.12);
+    padding: 2px 7px; border-radius: 999px; font-weight: 600;
+  }
+
+  /* Mock 3: AI Chat */
+  .mock-chat .chat {
+    background: var(--bg-soft); border-radius: 12px;
+    border-top-left-radius: 4px;
+    padding: 10px 12px; font-size: 12px;
+    line-height: 1.6; margin-bottom: 8px;
+    max-width: 90%;
+  }
+  .mock-chat .chat.user {
+    background: var(--accent); color: #fff;
+    margin-left: auto;
+    border-top-left-radius: 12px; border-top-right-radius: 4px;
+  }
+  .mock-chat .chat strong { color: var(--accent); font-weight: 600; }
+  .mock-chat .chat.user strong { color: #fff; }
+
+  /* ───────── STORY ───────── */
+  .story {
+    padding: 88px 0; text-align: center;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .story-body {
+    max-width: 560px; margin: 0 auto;
+    font-family: var(--serif); font-size: 16px; line-height: 2.2;
+    color: var(--ink); text-align: left;
+    font-weight: 400;
+  }
+  .story-body p { margin: 0 0 1.4em; }
+  .story-body em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .story-body .pull {
+    display: inline-block; font-family: var(--hand-jp);
+    font-size: 26px; color: var(--accent);
+    margin: 16px 0 4px; letter-spacing: 1px;
+  }
+  .story-body .signature {
+    font-family: var(--hand-jp); font-size: 17px; color: var(--ink2);
+    text-align: right; margin-top: 24px;
+  }
+
+  /* ───────── FINAL CTA + DETAILED FORM ───────── */
+  .final-cta {
+    padding: 88px 24px;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(233, 199, 174, 0.4), transparent 60%),
+      var(--bg-soft);
+    border-top: 1px solid var(--line);
+  }
+  .final-cta-inner {
+    max-width: 540px; margin: 0 auto; text-align: center;
+  }
+  .final-cta h2 {
+    font-family: var(--serif); font-size: clamp(24px, 5vw, 32px);
+    font-weight: 500; line-height: 1.5; margin: 0 0 14px;
+    letter-spacing: -0.1px;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .final-cta .sub {
+    font-size: 14px; color: var(--ink2); line-height: 1.95;
+    margin: 0 auto 32px; max-width: 440px;
+  }
+
+  /* Form */
+  .form-card {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line); border-radius: 20px;
+    padding: 26px 24px;
+    box-shadow: 0 8px 28px rgba(60, 40, 20, 0.06);
+  }
+  .form-card label {
+    display: block; font-size: 12px; font-weight: 500; color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .form-card label .req { color: var(--accent); }
+  .form-card label .opt {
+    color: var(--ink3); font-weight: 400; margin-left: 6px; font-size: 11px;
+  }
+  .form-card input[type="email"] {
+    width: 100%; padding: 13px 16px; font-size: 15px;
+    font-family: var(--sans); color: var(--ink);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 10px; outline: none;
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .form-card input[type="email"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(181, 87, 46, 0.12);
+  }
+  .chip-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px;
+  }
+  .chip-section { margin-top: 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .chip {
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--bg-soft); border: 1px solid var(--line);
+    color: var(--ink2); font-size: 12px; font-weight: 500;
+    cursor: pointer; user-select: none; transition: all 0.12s;
+  }
+  .chip.mini { padding: 5px 10px; font-size: 11px; }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+    font-weight: 600;
+  }
+  .submit-btn {
+    display: block; width: 100%; margin-top: 22px;
+    background: var(--accent); color: #fff; border: 0;
+    padding: 15px 0; border-radius: 12px;
+    font-family: var(--serif); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(181, 87, 46, 0.25);
+  }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(181, 87, 46, 0.35); }
+  .form-foot {
+    margin-top: 12px; font-size: 11px; color: var(--ink3);
+    text-align: center; line-height: 1.7;
+  }
+  .success-msg { display: none; text-align: center; padding: 20px 8px; }
+  .success-msg.show { display: block; }
+  .success-msg .check {
+    width: 56px; height: 56px; margin: 0 auto 14px;
+    border-radius: 999px; background: var(--accent);
+    color: #fff; display: grid; place-items: center;
+    font-family: var(--serif); font-size: 26px;
+  }
+  .success-msg h3 {
+    font-family: var(--serif); font-size: 18px; font-weight: 500; margin: 0 0 8px;
+  }
+  .success-msg p { font-size: 13px; color: var(--ink2); margin: 0; line-height: 1.8; }
+
+  /* ───────── PARTNERS ───────── */
+  .partners {
+    padding: 64px 24px; text-align: center;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+  .partners-inner { max-width: 640px; margin: 0 auto; }
+  .partners h3 {
+    font-family: var(--serif); font-size: 22px; font-weight: 500;
+    margin: 0 0 10px; line-height: 1.55; letter-spacing: -0.1px;
+  }
+  .partners h3 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .partners .lead {
+    font-size: 13px; color: var(--ink2); line-height: 2; margin: 0 0 22px;
+  }
+  .partners-cats {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin-bottom: 26px;
+  }
+  .partners-cats .pc {
+    padding: 5px 12px; background: var(--bg-soft);
+    border: 1px solid var(--line); border-radius: 999px;
+    font-size: 11px; color: var(--ink2); font-weight: 500;
+  }
+  .partners-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--accent);
+    padding: 11px 24px; border: 1.5px solid var(--accent); border-radius: 999px;
+    font-family: var(--serif); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .partners-cta:hover {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 6px 18px rgba(181,87,46,0.2);
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(20, 15, 10, 0.55);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px; backdrop-filter: blur(4px);
+  }
+  .modal.show { display: flex; animation: fadeIn 0.25s; }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  .modal-card {
+    background: var(--surface); border-radius: 20px;
+    padding: 28px 26px; max-width: 460px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+    max-height: 90vh; overflow-y: auto;
+    animation: popIn 0.3s;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px;
+    width: 30px; height: 30px; border-radius: 999px;
+    background: var(--bg-soft); border: none; cursor: pointer;
+    color: var(--ink2); font-size: 18px; line-height: 1;
+  }
+  .modal-close:hover { background: var(--surface-alt); }
+  .modal-card h3 {
+    font-family: var(--serif); font-size: 20px; font-weight: 500;
+    margin: 0 0 6px; letter-spacing: -0.2px;
+  }
+  .modal-card .modal-sub {
+    font-size: 13px; color: var(--ink2); margin: 0 0 22px; line-height: 1.9;
+  }
+  .modal-card .field { margin-bottom: 14px; }
+  .modal-card input, .modal-card textarea {
+    width: 100%; padding: 12px 14px; font-size: 14px;
+    font-family: var(--sans); color: var(--ink);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 10px; outline: none;
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .modal-card textarea { min-height: 100px; resize: vertical; }
+  .modal-card input:focus, .modal-card textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(181,87,46,0.12);
+  }
+
+  /* ───────── FAQ ───────── */
+  .faq { padding: 72px 0; border-top: 1px solid var(--line); }
+  .faq-list { max-width: 680px; margin: 0 auto; display: grid; gap: 10px; }
+  details.faq-item {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 20px;
+    transition: border-color 0.15s;
+  }
+  details.faq-item[open] { border-color: var(--accent); }
+  details.faq-item > summary {
+    list-style: none; cursor: pointer;
+    font-family: var(--serif); font-size: 15px; font-weight: 500;
+    color: var(--ink); display: flex; align-items: center; gap: 12px;
+  }
+  details.faq-item > summary::-webkit-details-marker { display: none; }
+  details.faq-item > summary::after {
+    content: '+'; margin-left: auto; font-family: var(--serif);
+    font-size: 22px; color: var(--accent); font-weight: 400;
+  }
+  details.faq-item[open] > summary::after { content: '−'; }
+  details.faq-item .answer {
+    padding-top: 14px; margin-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px; color: var(--ink2); line-height: 2;
+  }
+
+  /* ───────── FOOTER ───────── */
+  footer {
+    padding: 36px 24px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+  footer .footer-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: space-between; align-items: center;
+  }
+  footer .logo-small {
+    font-family: var(--serif); font-size: 18px; font-weight: 600;
+  }
+  footer .copy {
+    font-family: var(--serif); font-size: 11px;
+    color: var(--ink3); margin-top: 4px; letter-spacing: 1px;
+  }
+  footer .links {
+    display: flex; gap: 18px; font-size: 12px; color: var(--ink2);
+  }
+  footer .links a:hover { color: var(--accent); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="header-inner">
+    <div class="logo">
+      LifePath
+      <small>ライフ・パス</small>
+    </div>
+    <button class="hdr-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+      事前登録
+    </button>
+  </div>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="copy">
+      <div class="badge">
+        <span class="dot"></span>2026年 ローンチ予定
+      </div>
+
+      <p class="lead-quote">
+        七五三、いつから何をすれば…？<br/>
+        気づいたら、<em>もう過ぎていた。</em>
+      </p>
+      <p class="lead-attr">— 子育て中のあるお母さんの声</p>
+
+      <h1>
+        だから、人生にも<br/>
+        <em>ガントチャート</em>を。
+      </h1>
+      <p class="lead">
+        七五三・入学・結婚式・葬儀。<br/>
+        人生の大切な節目を、家族みんなで<br/>
+        抜け漏れなく準備するアプリです。
+      </p>
+
+      <button class="primary-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        アプリの事前登録はこちら
+        <span class="arrow">→</span>
+      </button>
+      <p class="cta-note">
+        登録は <span class="strong">メールアドレスを入れるだけ</span>。答えられる範囲でアンケートにご協力いただけると、より使いやすいアプリ作りの参考になります。
+      </p>
+    </div>
+
+    <!-- Polaroid stack with image-slots (drag your royalty-free photos in!) -->
+    <div class="hero-visual">
+      <div class="polaroid p1">
+        <img src="https://images.unsplash.com/photo-1716440258786-a965ba03781f?w=400&h=350&fit=crop&auto=format" alt="七五三の子ども" />
+        <div class="cap">蓮の七五三</div>
+        <div class="date">2026.03</div>
+      </div>
+      <div class="polaroid p2">
+        <img src="https://images.unsplash.com/photo-1653614711383-640089eefb72?w=400&h=350&fit=crop&auto=format" alt="結婚式" />
+        <div class="cap">妹の結婚式</div>
+        <div class="date">2026.04</div>
+      </div>
+      <div class="polaroid p3">
+        <img src="https://images.unsplash.com/photo-1526366530411-7c386cc29c8e?w=400&h=350&fit=crop&auto=format" alt="桜と入園" />
+        <div class="cap">葵の入園</div>
+        <div class="date">2027.04</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REAL VOICES ─── -->
+<section class="voices">
+  <div class="wrap">
+    <div class="section-label reveal">こんな経験、ありませんか</div>
+    <h2 class="section-title reveal">
+      もしかして、<em>こんな話</em>、語っていませんか？
+    </h2>
+    <div class="voice-grid">
+      <div class="voice-card reveal">
+        <p class="quote">
+          七五三の予約、半年前から動かないと希望の日が取れないなんて知らなかった。<em>気づいた頃にはもう遅かった。</em>
+        </p>
+        <div class="attr">
+          <span class="name">美咲</span>
+          <span class="dot"></span>
+          <span class="role">2児の母 ・ 35歳</span>
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <p class="quote">
+          祖父の一周忌、誰が何をやるか曖昧なまま当日に。<em>家族間の連絡で疲れてしまった。</em>
+        </p>
+        <div class="attr">
+          <span class="name">健太</span>
+          <span class="dot"></span>
+          <span class="role">兄弟3人 ・ 42歳</span>
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <p class="quote">
+          子どもの入学準備、毎年バタバタ。<em>同じ手順なのに毎回ゼロから調べ直しています。</em>
+        </p>
+        <div class="attr">
+          <span class="name">あゆみ</span>
+          <span class="dot"></span>
+          <span class="role">3児の母 ・ 38歳</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="features">
+  <div class="wrap">
+    <div class="section-label reveal">できること</div>
+    <h2 class="section-title reveal">
+      3つの機能で、<em>人生を整える。</em>
+    </h2>
+
+    <!-- Feature 1: Timeline -->
+    <div class="feature reveal">
+      <div class="feature-text">
+        <div class="feature-num">01</div>
+        <h3>家族の人生を、<em>ひとつの年表</em>に。</h3>
+        <p>
+          七五三・入学・結婚式・法要。家族みんなの大切な節目を、ひとつの年表に並べて見える化。これから何があるか、何があったかが、ひと目でわかります。
+        </p>
+        <div class="tag-row">
+          <span class="tag">自動年表生成</span>
+          <span class="tag">家族で共有</span>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="mock-title">年表</div>
+        <div class="mock-tl">
+          <div class="yr">2027年</div>
+          <div class="item cel">長女・葵の七五三 <span class="meta">11月 ・ 3歳</span></div>
+          <div class="yr cur">2026年 ・ 今ここ</div>
+          <div class="item cel">長男・蓮の七五三 <span class="meta">3/15 ・ 5歳</span></div>
+          <div class="item wed">妹・美咲の結婚式 <span class="meta">4/20 ・ 参列</span></div>
+          <div class="item fun">祖父・一周忌 <span class="meta">4/01 ・ 法要</span></div>
+          <div class="yr">2025年</div>
+          <div class="item oth">次男・誕生 <span class="meta">7/03</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: Tasks -->
+    <div class="feature reverse reveal">
+      <div class="feature-text">
+        <div class="feature-num">02</div>
+        <h3>本番日から<em>逆算</em>した、抜け漏れないタスク。</h3>
+        <p>
+          半年前は何を？1ヶ月前は？前日は？経験者の知恵を借りた逆算タスクが、ちょうどよいタイミングで届きます。「気づいたらもう遅い」がなくなります。
+        </p>
+        <div class="tag-row">
+          <span class="tag">逆算タスク</span>
+          <span class="tag">期限リマインド</span>
+          <span class="tag">担当者割当</span>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="mock-title">長男の七五三のタスク</div>
+        <div class="mock-progress-row">
+          <div class="mock-progress-bar"><div></div></div>
+          <div class="mock-progress-text">6 / 15</div>
+        </div>
+        <div class="mock-task done">
+          <div class="check">✓</div>
+          <div class="label">着物・衣装の手配</div>
+          <div class="meta">完了</div>
+        </div>
+        <div class="mock-task">
+          <div class="check"></div>
+          <div class="label">写真館の予約</div>
+          <div class="meta">あと12日</div>
+        </div>
+        <div class="mock-task urgent">
+          <div class="check"></div>
+          <div class="label">法要会場の予約</div>
+          <div class="meta">急ぎ</div>
+        </div>
+        <div class="mock-task">
+          <div class="check"></div>
+          <div class="label">親戚への日程連絡</div>
+          <div class="meta">担当: 夫</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: AI -->
+    <div class="feature reveal">
+      <div class="feature-text">
+        <div class="feature-num">03</div>
+        <h3>段取りを、<em>AIが一緒に</em>考える。</h3>
+        <p>
+          「子どもの七五三を計画したい」と話しかけるだけで、本番日から逆算したタスクリストを作成。経験がなくても、迷わず進められます。
+        </p>
+        <div class="tag-row">
+          <span class="tag">AIタスク提案</span>
+          <span class="tag">家族で分担</span>
+        </div>
+      </div>
+      <div class="mock mock-chat">
+        <div class="mock-title">AIと相談する</div>
+        <div class="chat">こんにちは。どんなイベントを準備しますか？</div>
+        <div class="chat user">長男（5歳）の七五三を計画したい</div>
+        <div class="chat">承知しました。本番日から逆算して、神社参拝・着物手配・写真撮影など <strong>15個のタスク</strong> を準備しました。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STORY ─── -->
+<section class="story">
+  <div class="wrap">
+    <div class="section-label reveal">作った理由</div>
+    <h2 class="section-title reveal">
+      なぜ、これを作っているのか。
+    </h2>
+    <div class="story-body reveal">
+      <p>
+        子育てを始めたとき、ふと気づきました。<br/>
+        「お宮参り、いつまでに何をすればいいんだろう？」
+      </p>
+      <p>
+        七五三、入学、ランドセル選び、卒業、成人式。人生にはやることがたくさんあるのに、それを<em>ひとつにまとめて見える場所</em>が、どこにもなかったんです。
+      </p>
+      <p>
+        仕事ならガントチャート、プロジェクト管理ツールがある。<br/>
+        でも<em>人生にはなかった。</em>
+      </p>
+      <div class="pull">だから、作りました。</div>
+      <p>
+        家族の人生を、抜け漏れなく準備するための、<em>ライフ・ガントチャート</em>を。
+      </p>
+      <div class="signature">— LifePath 開発者より</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA + FORM ─── -->
+<section class="final-cta" id="cta">
+  <div class="final-cta-inner">
+    <div class="section-label reveal">事前登録</div>
+    <h2 class="reveal">
+      家族の<em>次の節目</em>に、<br/>
+      先回りしませんか。
+    </h2>
+    <p class="sub reveal">
+      ローンチ準備中です。準備が整い次第、<br/>
+      メールでご案内します。
+    </p>
+
+    <form class="form-card reveal" onsubmit="handleSubmit(event)">
+      <div id="form-state">
+        <div class="field">
+          <label for="email">メールアドレス <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="your@example.com" required />
+        </div>
+
+        <div class="chip-row">
+          <div>
+            <label>年代</label>
+            <div class="chips" id="chips-age">
+              <div class="chip mini" data-val="20">20代</div>
+              <div class="chip mini" data-val="30">30代</div>
+              <div class="chip mini" data-val="40">40代</div>
+              <div class="chip mini" data-val="50">50代+</div>
+            </div>
+          </div>
+          <div>
+            <label>性別</label>
+            <div class="chips" id="chips-gender">
+              <div class="chip mini" data-val="f">女性</div>
+              <div class="chip mini" data-val="m">男性</div>
+              <div class="chip mini" data-val="o">その他</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chip-section">
+          <label>気になっているイベント<span class="opt">任意 ・ 複数可</span></label>
+          <div class="chips" id="chips-events">
+            <div class="chip" data-val="omiyamairi">お宮参り</div>
+            <div class="chip" data-val="shichigosan">七五三</div>
+            <div class="chip" data-val="nyugaku">入学・卒業</div>
+            <div class="chip" data-val="seijin">成人式</div>
+            <div class="chip" data-val="wedding">結婚式</div>
+            <div class="chip" data-val="kanreki">還暦・長寿祝い</div>
+            <div class="chip" data-val="funeral">葬儀・法要</div>
+            <div class="chip" data-val="other">その他</div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">事前登録する</button>
+        <p class="form-foot">
+          ローンチ時にメールでお知らせします。<br/>
+          いつでも登録解除できます。
+        </p>
+      </div>
+
+      <div class="success-msg" id="success">
+        <div class="check">✓</div>
+        <h3>ありがとうございます</h3>
+        <p>準備が整いましたら、メールでご案内します。<br/>少々お待ちください。</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ─── PARTNERS ─── -->
+<section class="partners">
+  <div class="partners-inner">
+    <div class="section-label reveal">パートナー募集</div>
+    <h3 class="reveal">
+      <em>提携先の方</em>へ。
+    </h3>
+    <p class="lead reveal">
+      着付け・写真スタジオ・弁護士・司法書士・税理士など、ライフイベントに関わる専門家・事業者の方々と連携を進めています。
+    </p>
+    <div class="partners-cats reveal">
+      <span class="pc">着付け・レンタル</span>
+      <span class="pc">写真スタジオ</span>
+      <span class="pc">ヘア・メイク</span>
+      <span class="pc">ウェディング</span>
+      <span class="pc">葬儀社</span>
+      <span class="pc">弁護士</span>
+      <span class="pc">司法書士</span>
+      <span class="pc">税理士</span>
+    </div>
+    <button class="partners-cta reveal" onclick="document.getElementById('partner-modal').classList.add('show')">
+      お問い合わせはこちら
+      <span>→</span>
+    </button>
+  </div>
+</section>
+
+<!-- ─── PARTNER MODAL ─── -->
+<div class="modal" id="partner-modal" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal-card">
+    <button class="modal-close" onclick="document.getElementById('partner-modal').classList.remove('show')">×</button>
+    <h3>提携・お問い合わせ</h3>
+    <p class="modal-sub">
+      連携をご希望の事業者さま、ご質問・ご相談のある方は、こちらからお問い合わせください。担当者より3営業日以内にご返信します。
+    </p>
+    <form onsubmit="handlePartnerSubmit(event)" id="partner-form">
+      <div class="field">
+        <label>お名前 <span style="color: var(--accent);">*</span></label>
+        <input type="text" name="name" required placeholder="山田 太郎" />
+      </div>
+      <div class="field">
+        <label>会社名・屋号</label>
+        <input type="text" name="company" placeholder="○○きもの店" />
+      </div>
+      <div class="field">
+        <label>メールアドレス <span style="color: var(--accent);">*</span></label>
+        <input type="email" name="email" required placeholder="your@example.com" />
+      </div>
+      <div class="field">
+        <label>事業内容・お問い合わせ内容</label>
+        <textarea name="message" placeholder="例：七五三向けの着物レンタル事業を行っています。連携の可能性を検討したく…"></textarea>
+      </div>
+      <button type="submit" class="submit-btn" style="margin-top: 6px;">送信する</button>
+    </form>
+    <div id="partner-success" style="display: none; text-align: center; padding: 24px 8px;">
+      <div class="check" style="width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 999px; background: var(--accent); color: #fff; display: grid; place-items: center; font-family: var(--serif); font-size: 26px;">✓</div>
+      <h3 style="margin: 0 0 8px;">お問い合わせを受け付けました</h3>
+      <p style="font-size: 13px; color: var(--ink2); margin: 0; line-height: 1.8;">
+        3営業日以内にご返信します。<br/>ありがとうございました。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FAQ ─── -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-label reveal">よくあるご質問</div>
+    <h2 class="section-title reveal">気になることに、お答えします</h2>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>いつ頃ローンチ予定ですか？</summary>
+        <div class="answer">2026年夏〜秋を予定しています。準備が整い次第、事前登録いただいた方から優先的にご案内します。</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>料金はいくらですか？</summary>
+        <div class="answer">基本機能は無料でお使いいただけます。AIによる計画作成・家族共有・無制限のイベント登録は有料プラン（FAMILYプラン）の予定です。詳細はローンチ時にお知らせします。</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>iOS / Android どちらで使えますか？</summary>
+        <div class="answer">iOS・Android・Webブラウザのすべてに対応予定です。家族間で違う端末を使っていても問題なく共有できます。</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>登録した情報はどう扱われますか？</summary>
+        <div class="answer">いただいたメールアドレスは、ローンチのお知らせ・サービスに関するご案内のみに使用します。第三者への提供は行いません。いつでも登録解除できます。</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>事前登録するとどんなメリットがありますか？</summary>
+        <div class="answer">ローンチ時に一般公開より早くご案内します。また、開発状況のアップデートを定期的にお届けします。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo-small">LifePath</div>
+      <div class="copy">© 2026 LifePath</div>
+    </div>
+    <div class="links">
+      <a href="#" onclick="document.getElementById('partner-modal').classList.add('show');event.preventDefault();">提携・お問い合わせ</a>
+      <a href="#">プライバシー</a>
+      <a href="#">利用規約</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll behavior
+  const hdr = document.getElementById('hdr');
+  document.addEventListener('scroll', () => {
+    hdr.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) en.target.classList.add('in');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Chip selection
+  document.getElementById('chips-events').addEventListener('click', e => {
+    const c = e.target.closest('.chip');
+    if (c) c.classList.toggle('active');
+  });
+  ['chips-age', 'chips-gender'].forEach(id => {
+    const root = document.getElementById(id);
+    if (!root) return;
+    root.addEventListener('click', e => {
+      const c = e.target.closest('.chip');
+      if (!c) return;
+      root.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+
+  // Main waitlist form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const age = form.querySelector('#chips-age .chip.active')?.dataset.val;
+    const gender = form.querySelector('#chips-gender .chip.active')?.dataset.val;
+    const interests = Array.from(form.querySelectorAll('#chips-events .chip.active')).map(c => c.dataset.val);
+
+    console.log('事前登録:', { email, age, gender, interests });
+    // TODO: POST to backend (Resend / Loops / Supabase / etc.)
+
+    document.getElementById('form-state').style.display = 'none';
+    document.getElementById('success').classList.add('show');
+  }
+
+  // Partner inquiry form
+  function handlePartnerSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+    console.log('提携問い合わせ:', data);
+    form.style.display = 'none';
+    document.getElementById('partner-success').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('partner-modal').classList.remove('show');
+      form.style.display = 'block';
+      document.getElementById('partner-success').style.display = 'none';
+      form.reset();
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>
